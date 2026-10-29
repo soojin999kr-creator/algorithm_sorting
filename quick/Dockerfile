@@ -24,6 +24,5 @@ COPY . .
 ENV PORT=8080
 EXPOSE 8080
 
-# Uvicorn 서버 실행 (단일 프로세스 컨테이너)
-CMD exec uvicorn main:app --host 0.0.0.0 --port ${PORT}
-
+# [수정됨] sh -c 를 명시적으로 호출하여 런타임에 환경변수 $PORT가 무조건 치환되도록 보장
+CMD ["sh", "-c", "uvicorn main:app --host 0.0.0.0 --port $PORT"]
